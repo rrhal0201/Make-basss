@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUPER MEGA UKULELE | 베이스 기타 백과사전</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts (Noto Sans KR & Oswald) -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #0d0f12;
+      color: #f3f4f6;
+      overflow-x: hidden;
+    }
+    .font-display {
+      font-family: 'Oswald', sans-serif;
+    }
+    /* 아코디언 부드러운 전환 애니메이션 */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), padding 0.3s ease;
+    }
+    .accordion-item.active .accordion-content {
+      max-height: 800px;
+      padding-bottom: 1.5rem;
+    }
+    .accordion-item.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+    /* 이퀄라이저 애니메이션 */
+    @keyframes eqBar {
+      0%, 100% { height: 20%; }
+      50% { height: 100%; }
+    }
+    .playing .eq-bar-1 { animation: eqBar 0.45s infinite ease-in-out; }
+    .playing .eq-bar-2 { animation: eqBar 0.35s infinite ease-in-out 0.1s; }
+    .playing .eq-bar-3 { animation: eqBar 0.55s infinite ease-in-out 0.2s; }
+    .playing .eq-bar-4 { animation: eqBar 0.40s infinite ease-in-out 0.15s; }
+    .playing .eq-bar-5 { animation: eqBar 0.50s infinite ease-in-out 0.05s; }
+
+    /* 베이스 현 진동 효과 */
+    @keyframes stringVibrate {
+      0% { transform: translateY(0px); }
+      25% { transform: translateY(-2px); }
+      50% { transform: translateY(2px); }
+      75% { transform: translateY(-1px); }
+      100% { transform: translateY(0px); }
+    }
+    .vibrate {
+      animation: stringVibrate 0.12s linear infinite;
+    }
+  </style>
+</head>
+<body class="selection:bg-amber-500 selection:text-black">
+
+  <!-- 상단 네비게이션 -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-[#0d0f12]/80 border-b border-zinc-800">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-amber-500 animate-pulse"></span>
+        <span class="font-display text-xl tracking-wider font-bold text-white">BASS<span class="text-amber-500">ARCHIVE</span></span>
+      </div>
+      <nav class="hidden md:flex gap-6 text-sm text-zinc-400">
+        <a href="#hero" class="hover:text-amber-400 transition">슈퍼 메가 우쿨렐레</a>
+        <a href="#player" class="hover:text-amber-400 transition">베이스 트랙 플레이어</a>
+        <a href="#history" class="hover:text-amber-400 transition">역사 & 구조</a>
+        <a href="#brands" class="hover:text-amber-400 transition">브랜드별 특징</a>
+        <a href="#bassists" class="hover:text-amber-400 transition">전설의 베이시스트</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 1. HERO SECTION: 중앙 대형 베이스 이미지 & 소개 -->
+  <section id="hero" class="relative py-16 md:py-24 px-4 overflow-hidden">
+    <!-- 배경 글로우 효과 -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-amber-500/15 blur-[120px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+      <div class="inline-block px-4 py-1.5 mb-4 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 text-xs font-semibold tracking-widest uppercase">
+        The Low-End King · 4 Strings of Thunder
+      </div>
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight">
+        일렉트릭 베이스,<br class="md:hidden" /> 일명 <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-red-500">“슈퍼 메가 우쿨렐레”</span>
+      </h1>
+      <p class="text-zinc-400 max-w-2xl mx-auto text-base md:text-lg mb-10 leading-relaxed">
+        언뜻 보면 거대하고 묵직해진 4줄짜리 우쿨렐레 같지만, 실제로는 밴드의 심장 박동과 뼈대를 책임지는 가장 치명적인 저음 악기입니다. 줄을 튕겨 사운드를 직접 들어보세요!
+      </p>
+
+      <!-- 중앙 대형 인터랙티브 일렉트릭 베이스 SVG 이미지 -->
+      <div class="relative max-w-4xl mx-auto my-8 p-6 md:p-10 rounded-3xl bg-gradient-to-b from-zinc-900/90 to-zinc-950 border border-zinc-800 shadow-2xl">
+        <div class="text-xs text-zinc-500 mb-3 flex justify-between items-center">
+          <span>🎸 아래 베이스 현(String)을 클릭하면 실제 베이스 음이 연주됩니다!</span>
+          <span class="text-amber-500 font-mono">E1 - A1 - D2 - G2</span>
+        </div>
+
+        <!-- 정밀 벡터 일렉트릭 베이스 (Sunburst Jazz/Precision Style) -->
+        <svg id="hero-bass-svg" viewBox="0 0 1000 320" class="w-full h-auto drop-shadow-[0_20px_35px_rgba(0,0,0,0.9)] select-none">
+          <defs>
+            <!-- 선버스트 바디 그라데이션 -->
+            <radialGradient id="sunburst" cx="45%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#f59e0b" />
+              <stop offset="45%" stop-color="#b45309" />
+              <stop offset="80%" stop-color="#451a03" />
+              <stop offset="100%" stop-color="#180902" />
+            </radialGradient>
+            <!-- 넥 메이플 우드 -->
+            <linearGradient id="mapleNeck" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#d97706" />
+              <stop offset="100%" stop-color="#f3c68f" />
+            </linearGradient>
+            <!-- 로즈우드 지판 -->
+            <linearGradient id="rosewood" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#29150d" />
+              <stop offset="100%" stop-color="#3f2115" />
+            </linearGradient>
+            <!-- 크롬 금속 질감 -->
+            <linearGradient id="chrome" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="50%" stop-color="#9ca3af" />
+              <stop offset="100%" stop-color="#4b5563" />
+            </linearGradient>
+          </defs>
+
+          <!-- 헤드스톡 (Headstock) -->
+          <path d="M 40 125 C 20 120, 15 155, 35 175 C 55 190, 110 185, 145 172 L 145 142 C 115 135, 80 110, 40 125 Z" fill="url(#mapleNeck)" stroke="#78350f" stroke-width="2"/>
+          <!-- 튜닝 페그 (4개 클로버형) -->
+          <g fill="url(#chrome)" stroke="#374151" stroke-width="1.5">
+            <circle cx="52" cy="112" r="10"/><rect x="49" y="120" width="6" height="10"/>
+            <circle cx="77" cy="115" r="10"/><rect x="74" y="123" width="6" height="10"/>
+            <circle cx="102" cy="119" r="10"/><rect x="99" y="127" width="6" height="10"/>
+            <circle cx="127" cy="124" r="10"/><rect x="124" y="132" width="6" height="10"/>
+          </g>
+
+          <!-- 넥 & 지판 (Neck & Fretboard) -->
+          <rect x="145" y="141" width="440" height="32" rx="2" fill="url(#rosewood)" />
+          <!-- 너트 (Nut) -->
+          <rect x="145" y="141" width="5" height="32" fill="#f9fafb" />
+
+          <!-- 프렛 와이어 (20 Frets) -->
+          <g stroke="#d1d5db" stroke-width="1.5" opacity="0.8">
+            <line x1="175" y1="141" x2="175" y2="173"/><line x1="203" y1="141" x2="203" y2="173"/>
+            <line x1="230" y1="141" x2="230" y2="173"/><line x1="255" y1="141" x2="255" y2="173"/>
+            <line x1="279" y1="141" x2="279" y2="173"/><line x1="302" y1="141" x2="302" y2="173"/>
+            <line x1="324" y1="141" x2="324" y2="173"/><line x1="345" y1="141" x2="345" y2="173"/>
+            <line x1="365" y1="141" x2="365" y2="173"/><line x1="384" y1="141" x2="384" y2="173"/>
+            <line x1="402" y1="141" x2="402" y2="173"/><line x1="419" y1="141" x2="419" y2="173"/>
+            <line x1="435" y1="141" x2="435" y2="173"/><line x1="450" y1="141" x2="450" y2="173"/>
+            <line x1="464" y1="141" x2="464" y2="173"/><line x1="477" y1="141" x2="477" y2="173"/>
+          </g>
+          <!-- 지판 인레이 점 -->
+          <g fill="#f3f4f6" opacity="0.85">
+            <circle cx="216" cy="157" r="3.5"/><circle cx="267" cy="157" r="3.5"/>
+            <circle cx="313" cy="157" r="3.5"/><circle cx="355" cy="157" r="3.5"/>
+            <circle cx="410" cy="150" r="3"/><circle cx="410" cy="164" r="3"/>
+          </g>
+
+          <!-- 바디 (Offset Bass Body) -->
+          <path d="M 520 135 
+                   C 495 95, 535 65, 585 88 
+                   C 625 105, 665 85, 725 65 
+                   C 815 35, 925 75, 930 160 
+                   C 935 245, 825 285, 725 250 
+                   C 665 230, 625 215, 575 235 
+                   C 525 255, 490 220, 525 178 Z" 
+                fill="url(#sunburst)" stroke="#271003" stroke-width="3"/>
+
+          <!-- 픽가드 (Tortoise / Cream Pickguard) -->
+          <path d="M 565 130 
+                   C 565 105, 610 100, 650 112 
+                   C 700 125, 745 130, 750 165 
+                   C 752 195, 700 220, 640 218 
+                   C 595 216, 565 195, 565 175 Z" 
+                fill="#fef3c7" opacity="0.92" stroke="#d97706" stroke-width="1.5"/>
+
+          <!-- 컨트롤 플레이트 (크롬) -->
+          <path d="M 655 218 L 765 208 C 775 207, 780 225, 768 230 L 660 242 C 648 243, 645 220, 655 218 Z" fill="url(#chrome)" />
+          <!-- 노브 3개 -->
+          <circle cx="675" cy="228" r="8" fill="#18181b" stroke="#9ca3af" stroke-width="1.5"/>
+          <circle cx="712" cy="224" r="8" fill="#18181b" stroke="#9ca3af" stroke-width="1.5"/>
+          <circle cx="748" cy="220" r="6" fill="#18181b" stroke="#9ca3af" stroke-width="1.5"/>
+
+          <!-- 픽업 2개 (Neck & Bridge Jazz Pickups) -->
+          <rect x="635" y="132" width="22" height="52" rx="4" fill="#18181b" stroke="#52525b" stroke-width="1.5"/>
+          <rect x="735" y="130" width="22" height="56" rx="4" fill="#18181b" stroke="#52525b" stroke-width="1.5"/>
+          <!-- 폴피스 (자석 점) -->
+          <g fill="#d4d4d8">
+            <circle cx="646" cy="141" r="2.2"/><circle cx="646" cy="151" r="2.2"/><circle cx="646" cy="162" r="2.2"/><circle cx="646" cy="173" r="2.2"/>
+            <circle cx="746" cy="139" r="2.2"/><circle cx="746" cy="151" r="2.2"/><circle cx="746" cy="163" r="2.2"/><circle cx="746" cy="175" r="2.2"/>
+          </g>
+
+          <!-- 브릿지 (Bridge) -->
+          <rect x="815" y="132" width="28" height="52" rx="3" fill="url(#chrome)" stroke="#374151"/>
+
+          <!-- 4개의 베이스 현 (클릭 가능) -->
+          <g id="bass-strings" class="cursor-pointer">
+            <!-- G선 (가장 얇음) -->
+            <line id="str-g" x1="145" y1="146" x2="825" y2="142" stroke="#e4e4e7" stroke-width="1.5" onclick="pluckString(98.00, 'str-g')" />
+            <!-- D선 -->
+            <line id="str-d" x1="145" y1="153" x2="825" y2="152" stroke="#d4d4d8" stroke-width="2.1" onclick="pluckString(73.42, 'str-d')" />
+            <!-- A선 -->
+            <line id="str-a" x1="145" y1="160" x2="825" y2="162" stroke="#a1a1aa" stroke-width="2.8" onclick="pluckString(55.00, 'str-a')" />
+            <!-- E선 (가장 두꺼운 저음 현) -->
+            <line id="str-e" x1="145" y1="167" x2="825" y2="172" stroke="#71717a" stroke-width="3.6" onclick="pluckString(41.20, 'str-e')" />
+          </g>
+        </svg>
+
+        <!-- 간편 테스트 버튼 -->
+        <div class="flex flex-wrap justify-center gap-3 mt-4">
+          <button onclick="pluckString(41.20, 'str-e')" class="px-4 py-1.5 rounded-lg bg-zinc-800 hover:bg-amber-500 hover:text-black text-xs font-bold transition">E현 (41Hz 묵직한 저음)</button>
+          <button onclick="pluckString(55.00, 'str-a')" class="px-4 py-1.5 rounded-lg bg-zinc-800 hover:bg-amber-500 hover:text-black text-xs font-bold transition">A현 (55Hz)</button>
+          <button onclick="pluckString(73.42, 'str-d')" class="px-4 py-1.5 rounded-lg bg-zinc-800 hover:bg-amber-500 hover:text-black text-xs font-bold transition">D현 (73Hz)</button>
+          <button onclick="pluckString(98.00, 'str-g')" class="px-4 py-1.5 rounded-lg bg-zinc-800 hover:bg-amber-500 hover:text-black text-xs font-bold transition">G현 (98Hz 슬랩 팝!)</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. AUDIO PLAYER: 베이스 어쌔신 & 그루브 트랙 플레이어 -->
+  <section id="player" class="py-12 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-gradient-to-r from-zinc-900 via-[#17191e] to-zinc-900 border border-amber-500/30 rounded-2xl p-6 md:p-8 shadow-2xl">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          
+          <!-- 트랙 정보 & 이퀄라이저 -->
+          <div class="flex items-center gap-5 w-full md:w-auto">
+            <div id="eq-box" class="w-16 h-16 rounded-xl bg-zinc-950 border border-zinc-800 flex items-end justify-center gap-1 p-3 shrink-0">
+              <div class="w-1.5 bg-amber-500 rounded-t eq-bar-1" style="height: 30%"></div>
+              <div class="w-1.5 bg-orange-500 rounded-t eq-bar-2" style="height: 60%"></div>
+              <div class="w-1.5 bg-red-500 rounded-t eq-bar-3" style="height: 45%"></div>
+              <div class="w-1.5 bg-amber-400 rounded-t eq-bar-4" style="height: 80%"></div>
+              <div class="w-1.5 bg-orange-400 rounded-t eq-bar-5" style="height: 35%"></div>
+            </div>
+            <div>
+              <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">LIVE SYNTH BASS ENGINE</span>
+              <h3 id="track-title" class="text-xl font-bold text-white mt-0.5">Bass Assassin (Slap & Funk Groove)</h3>
+              <p id="track-desc" class="text-xs text-zinc-400 mt-1">공격적인 슬랩 주법과 옥타브 리프가 돋보이는 펑크 베이스 트랙</p>
+            </div>
+          </div>
+
+          <!-- 컨트롤 버튼 -->
+          <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+            <button id="play-btn" onclick="togglePlay()" class="flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-sm transition shadow-lg shadow-amber-500/20">
+              <span id="play-icon">▶</span>
+              <span id="play-text">트랙 재생</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 트랙 선택 탭 -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6 pt-6 border-t border-zinc-800/80">
+          <button onclick="selectTrack(0)" id="track-btn-0" class="track-tab text-left p-3 rounded-xl bg-amber-500/15 border border-amber-500/50 transition">
+            <div class="text-xs text-amber-400 font-bold">TRACK 01 · 118 BPM</div>
+            <div class="text-sm font-semibold text-white mt-0.5">Bass Assassin (Slap Funk)</div>
+          </button>
+          <button onclick="selectTrack(1)" id="track-btn-1" class="track-tab text-left p-3 rounded-xl bg-zinc-950/60 border border-zinc-800 hover:border-zinc-700 transition">
+            <div class="text-xs text-zinc-400 font-bold">TRACK 02 · 132 BPM</div>
+            <div class="text-sm font-semibold text-white mt-0.5">Dark Metal Pick Riff</div>
+          </button>
+          <button onclick="selectTrack(2)" id="track-btn-2" class="track-tab text-left p-3 rounded-xl bg-zinc-950/60 border border-zinc-800 hover:border-zinc-700 transition">
+            <div class="text-xs text-zinc-400 font-bold">TRACK 03 · 96 BPM</div>
+            <div class="text-sm font-semibold text-white mt-0.5">Midnight Walking Jazz</div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ACCORDION SECTION: 베이스 소개 및 역사 (아코디언 UI) -->
+  <section id="history" class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-10">
+        <span class="text-amber-500 font-bold text-sm tracking-wider uppercase">Story & Evolution</span>
+        <h2 class="text-3xl font-extrabold mt-1">왜 ‘슈퍼 메가 우쿨렐레’인가? 베이스의 역사와 비밀</h2>
+        <p class="text-zinc-400 text-sm mt-2">각 항목을 클릭하여 베이스 기타의 탄생 배경과 음악적 역할을 펼쳐보세요.</p>
+      </div>
+
+      <div class="space-y-4" id="accordion-container">
+        <!-- 아코디언 1 -->
+        <div class="accordion-item active bg-zinc-900/70 border border-zinc-800 rounded-2xl px-6 transition">
+          <button onclick="toggleAccordion(this)" class="w-full py-5 flex justify-between items-center text-left">
+            <div class="flex items-center gap-4">
+              <span class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 font-display font-bold flex items-center justify-center">01</span>
+              <span class="text-lg font-bold text-white">별명 유래: 진짜로 슈퍼 메가 우쿨렐레일까?</span>
+            </div>
+            <svg class="accordion-icon w-5 h-5 text-zinc-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="accordion-content text-zinc-300 text-sm leading-relaxed border-t border-zinc-800/60">
+            <p class="pt-4">
+              일반 일렉트릭 기타는 6줄이지만, 표준 베이스 기타는 <strong>4줄(E-A-D-G)</strong>로 이루어져 있어 악기를 잘 모르는 사람들의 눈에는 마치 <em>“거대하게 펌핑된 슈퍼 메가 우쿨렐레”</em>처럼 보입니다. 하지만 길이는 약 110~120cm에 달하며, 현의 두께가 굵고 장력이 엄청나게 강해 가슴을 울리는 초저음역대(40Hz~250Hz)를 담당합니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- 아코디언 2 -->
+        <div class="accordion-item bg-zinc-900/70 border border-zinc-800 rounded-2xl px-6 transition">
+          <button onclick="toggleAccordion(this)" class="w-full py-5 flex justify-between items-center text-left">
+            <div class="flex items-center gap-4">
+              <span class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 font-display font-bold flex items-center justify-center">02</span>
+              <span class="text-lg font-bold text-white">1951년 혁명: 레오 펜더와 ‘프레시전 베이스’의 탄생</span>
+            </div>
+            <svg class="accordion-icon w-5 h-5 text-zinc-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="accordion-content text-zinc-300 text-sm leading-relaxed border-t border-zinc-800/60">
+            <p class="pt-4">
+              1950년대 이전까지 밴드의 저음은 사람 키보다 큰 <strong>콘트라베이스(더블 베이스)</strong>가 맡았습니다. 차에 싣기도 힘들고 소리가 작아 드럼과 관악기 소리에 묻히기 일쑤였죠. 1951년 <strong>레오 펜더(Leo Fender)</strong>는 지판에 프렛(Fret)을 박아 ‘정확한(Precision)’ 음정을 낼 수 있고 앰프로 증폭 가능한 최초의 양산형 일렉트릭 베이스 <strong>Precision Bass</strong>를 출시하며 대중음악의 판도를 완전히 바꿨습니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- 아코디언 3 -->
+        <div class="accordion-item bg-zinc-900/70 border border-zinc-800 rounded-2xl px-6 transition">
+          <button onclick="toggleAccordion(this)" class="w-full py-5 flex justify-between items-center text-left">
+            <div class="flex items-center gap-4">
+              <span class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 font-display font-bold flex items-center justify-center">03</span>
+              <span class="text-lg font-bold text-white">밴드의 접착제: 리듬과 화성을 연결하는 다리</span>
+            </div>
+            <svg class="accordion-icon w-5 h-5 text-zinc-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="accordion-content text-zinc-300 text-sm leading-relaxed border-t border-zinc-800/60">
+            <p class="pt-4">
+              베이스는 <strong>드럼(리듬)</strong>과 <strong>기타·키보드(멜로디/화성)</strong>를 하나로 묶어주는 접착제 역할을 합니다. 드러머의 킥 드럼 비트와 정확히 맞아떨어지는 베이스 라인은 곡에 '그루브(Groove)'를 불어넣으며, 베이스가 어떤 근음(Root Note)을 짚느냐에 따라 같은 코드라도 완전히 다른 분위기의 화성으로 탈바꿈합니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- 아코디언 4 -->
+        <div class="accordion-item bg-zinc-900/70 border border-zinc-800 rounded-2xl px-6 transition">
+          <button onclick="toggleAccordion(this)" class="w-full py-5 flex justify-between items-center text-left">
+            <div class="flex items-center gap-4">
+              <span class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 font-display font-bold flex items-center justify-center">04</span>
+              <span class="text-lg font-bold text-white">연주 주법의 진화: 핑거링부터 슬랩(Slap)까지</span>
+            </div>
+            <svg class="accordion-icon w-5 h-5 text-zinc-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="accordion-content text-zinc-300 text-sm leading-relaxed border-t border-zinc-800/60">
+            <ul class="pt-4 space-y-2 list-disc list-inside">
+              <li><strong>핑거링(Fingerstyle):</strong> 검지와 중지로 번갈아 뜯는 가장 따뜻하고 표준적인 주법.</li>
+              <li><strong>피킹(Picking):</strong> 피크로 줄을 긁어 날카롭고 펀치감 있는 록/메탈 사운드 연출.</li>
+              <li><strong>슬랩(Slap & Pop):</strong> 엄지로 줄을 때리고(Thumping) 검지로 줄을 튕겨(Popping) 타악기 같은 폭발적인 그루브를 만드는 주법.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. BRANDS SECTION: 베이스 브랜드별 특징 -->
+  <section id="brands" class="py-16 px-4 bg-zinc-950/60 border-y border-zinc-900">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-amber-500 font-bold text-sm tracking-wider uppercase">Iconic Makers</span>
+        <h2 class="text-3xl font-extrabold mt-1">베이스 브랜드별 사운드 & 특징 비교</h2>
+        <p class="text-zinc-400 text-sm mt-2">전 세계 베이시스트들이 사랑하는 대표 브랜드 4대장</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Fender -->
+        <div class="bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 rounded-2xl p-6 flex flex-col justify-between transition group">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="font-display text-2xl font-bold text-white group-hover:text-amber-400 transition">FENDER</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 font-semibold">표준의 정석</span>
+            </div>
+            <p class="text-xs text-zinc-400 mb-4">대표 모델: Jazz Bass, Precision Bass</p>
+            <p class="text-sm text-zinc-300 leading-relaxed mb-4">
+              일렉트릭 베이스의 역사를 연 브랜드. 묵직하고 단단한 중저음의 <strong>프레시전(PB)</strong>과 범용성 높고 선명한 <strong>재즈 베이스(JB)</strong>는 모든 장르의 교과서입니다.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-800 text-xs text-zinc-400 flex justify-between">
+            <span>성향: 패시브 / 빈티지</span>
+            <span class="text-amber-400">★★★★★</span>
+          </div>
+        </div>
+
+        <!-- Music Man -->
+        <div class="bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 rounded-2xl p-6 flex flex-col justify-between transition group">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="font-display text-2xl font-bold text-white group-hover:text-amber-400 transition">MUSIC MAN</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-orange-500/10 text-orange-400 font-semibold">슬랩의 제왕</span>
+            </div>
+            <p class="text-xs text-zinc-400 mb-4">대표 모델: StingRay (스팅레이)</p>
+            <p class="text-sm text-zinc-300 leading-relaxed mb-4">
+              레오 펜더가 설립한 또 다른 명가. 거대한 험버커 픽업과 액티브 프리앰프가 만들어내는 강렬하고 찰진 어택감 덕분에 <strong>펑크(Funk)와 록</strong>에서 독보적입니다.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-800 text-xs text-zinc-400 flex justify-between">
+            <span>성향: 액티브 / 펀치감</span>
+            <span class="text-amber-400">★★★★★</span>
+          </div>
+        </div>
+
+        <!-- Ibanez -->
+        <div class="bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 rounded-2xl p-6 flex flex-col justify-between transition group">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="font-display text-2xl font-bold text-white group-hover:text-amber-400 transition">IBANEZ</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-blue-500/10 text-blue-400 font-semibold">테크니컬 & 슬림</span>
+            </div>
+            <p class="text-xs text-zinc-400 mb-4">대표 모델: SR (Soundgear), BTB</p>
+            <p class="text-sm text-zinc-300 leading-relaxed mb-4">
+              얇고 날렵한 넥(Neck)과 가벼운 바디로 빠른 속주와 화려한 테크닉에 최적화되어 있습니다. 현대적인 톤 메이킹과 뛰어난 가성비로 입문자부터 프로까지 인기가 높습니다.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-800 text-xs text-zinc-400 flex justify-between">
+            <span>성향: 모던 / 다목적</span>
+            <span class="text-amber-400">★★★★☆</span>
+          </div>
+        </div>
+
+        <!-- Dingwall -->
+        <div class="bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 rounded-2xl p-6 flex flex-col justify-between transition group">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="font-display text-2xl font-bold text-white group-hover:text-amber-400 transition">DINGWALL</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-red-500/10 text-red-400 font-semibold">멀티스케일 괴물</span>
+            </div>
+            <p class="text-xs text-zinc-400 mb-4">대표 모델: NG (Nolly), Combustion</p>
+            <p class="text-sm text-zinc-300 leading-relaxed mb-4">
+              프렛이 부채꼴로 기울어진 <strong>팬드 프렛(Fanned Fret)</strong> 구조의 선두주자. 저음 현의 길이를 극대화해 5현·6현의 초저음에서도 피아노처럼 맑고 타이트한 사운드를 냅니다.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-800 text-xs text-zinc-400 flex justify-between">
+            <span>성향: 헤비 / 하이엔드</span>
+            <span class="text-amber-400">★★★★★</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. LEGENDARY BASSISTS: 전설적인 베이시스트 3인 소개 -->
+  <section id="bassists" class="py-16 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-12">
+        <span class="text-amber-500 font-bold text-sm tracking-wider uppercase">Hall of Fame</span>
+        <h2 class="text-3xl font-extrabold mt-1">베이스의 역사를 바꾼 전설적인 베이시스트</h2>
+        <p class="text-zinc-400 text-sm mt-2">슈퍼 메가 우쿨렐레를 예술의 경지로 끌어올린 3명의 거장</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- 베이시스트 1: Jaco Pastorius -->
+        <div class="bg-zinc-900/90 border border-zinc-800 rounded-3xl overflow-hidden shadow-xl flex flex-col">
+          <!-- 커스텀 아트워크 초상화 헤더 -->
+          <div class="h-52 bg-gradient-to-br from-amber-600 via-orange-800 to-zinc-950 relative flex items-center justify-center p-6">
+            <svg viewBox="0 0 120 120" class="w-32 h-32 drop-shadow-xl">
+              <circle cx="60" cy="60" r="54" fill="#18181b" stroke="#f59e0b" stroke-width="3"/>
+              <!-- 실루엣 & 프렛리스 베이스 상징 -->
+              <path d="M38 98 C38 76, 82 76, 82 98" fill="#f59e0b"/>
+              <circle cx="60" cy="48" r="18" fill="#fcd34d"/>
+              <path d="M40 45 C40 24, 80 24, 80 45 C82 55, 76 62, 74 52 C68 38, 52 38, 46 52 C44 62, 38 55, 40 45 Z" fill="#451a03"/>
+              <text x="60" y="112" text-anchor="middle" fill="#fde68a" font-size="9" font-weight="bold">FRETLESS KING</text>
+            </svg>
+            <span class="absolute top-4 right-4 bg-black/60 backdrop-blur px-3 py-1 rounded-full text-xs text-amber-300 font-semibold">1951 - 1987</span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-extrabold text-white">자코 파스토리우스</h3>
+              <p class="text-xs text-amber-400 font-semibold mb-3">Jaco Pastorius · 재즈 퓨전의 혁명가</p>
+              <p class="text-sm text-zinc-300 leading-relaxed">
+                자기 베이스의 프렛을 직접 펜치로 뽑아버리고 <strong>프렛리스(Fretless) 베이스</strong>의 시대를 연 천재. 반주 악기에 머물던 베이스를 화려한 솔로 악기로 격상시켰습니다.
+              </p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-zinc-800 text-xs text-zinc-400">
+              <strong>대표곡:</strong> Teen Town, Portrait of Tracy
+            </div>
+          </div>
+        </div>
+
+        <!-- 베이시스트 2: Flea -->
+        <div class="bg-zinc-900/90 border border-zinc-800 rounded-3xl overflow-hidden shadow-xl flex flex-col">
+          <div class="h-52 bg-gradient-to-br from-rose-600 via-purple-900 to-zinc-950 relative flex items-center justify-center p-6">
+            <svg viewBox="0 0 120 120" class="w-32 h-32 drop-shadow-xl">
+              <circle cx="60" cy="60" r="54" fill="#18181b" stroke="#fb7185" stroke-width="3"/>
+              <path d="M36 98 C36 74, 84 74, 84 98" fill="#fb7185"/>
+              <circle cx="60" cy="48" r="18" fill="#fecdd3"/>
+              <!-- 펑크 헤어 & 선글라스 -->
+              <polygon points="44,34 52,20 60,32 68,18 76,34" fill="#38bdf8"/>
+              <rect x="46" y="43" width="12" height="7" rx="1" fill="#09090b"/>
+              <rect x="62" y="43" width="12" height="7" rx="1" fill="#09090b"/>
+              <line x1="58" y1="46" x2="62" y2="46" stroke="#09090b" stroke-width="2"/>
+              <text x="60" y="112" text-anchor="middle" fill="#fda4af" font-size="9" font-weight="bold">SLAP MONSTER</text>
+            </svg>
+            <span class="absolute top-4 right-4 bg-black/60 backdrop-blur px-3 py-1 rounded-full text-xs text-rose-300 font-semibold">Red Hot Chili Peppers</span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-extrabold text-white">플리 (Flea)</h3>
+              <p class="text-xs text-rose-400 font-semibold mb-3">Michael Peter Balzary · 펑크 록 에너지의 화신</p>
+              <p class="text-sm text-zinc-300 leading-relaxed">
+                레드 핫 칠리 페퍼스의 심장. 무대 위를 날아다니는 폭발적인 퍼포먼스와 귀에 꽂히는 <strong>초고속 슬랩 베이스 라인</strong>으로 전 세계 수많은 사람들을 베이스 입문으로 이끈 아이콘입니다.
+              </p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-zinc-800 text-xs text-zinc-400">
+              <strong>대표곡:</strong> Can't Stop, Dark Necessities
+            </div>
+          </div>
+        </div>
+
+        <!-- 베이시스트 3: Marcus Miller -->
+        <div class="bg-zinc-900/90 border border-zinc-800 rounded-3xl overflow-hidden shadow-xl flex flex-col">
+          <div class="h-52 bg-gradient-to-br from-emerald-600 via-teal-900 to-zinc-950 relative flex items-center justify-center p-6">
+            <svg viewBox="0 0 120 120" class="w-32 h-32 drop-shadow-xl">
+              <circle cx="60" cy="60" r="54" fill="#18181b" stroke="#34d399" stroke-width="3"/>
+              <path d="M36 98 C36 74, 84 74, 84 98" fill="#059669"/>
+              <circle cx="60" cy="50" r="17" fill="#d97706"/>
+              <!-- 시그니처 페도라 모자 -->
+              <ellipse cx="60" cy="35" rx="26" ry="5" fill="#1f2937"/>
+              <path d="M44 35 L48 21 L72 21 L76 35 Z" fill="#374151"/>
+              <text x="60" y="112" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="bold">GROOVE MASTER</text>
+            </svg>
+            <span class="absolute top-4 right-4 bg-black/60 backdrop-blur px-3 py-1 rounded-full text-xs text-emerald-300 font-semibold">Jazz & Funk Legend</span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-extrabold text-white">마커스 밀러</h3>
+              <p class="text-xs text-emerald-400 font-semibold mb-3">Marcus Miller · 현대 슬랩과 그루브의 교과서</p>
+              <p class="text-sm text-zinc-300 leading-relaxed">
+                트레이드마크인 페도라 모자와 77년식 펜더 재즈 베이스로 현대 슬랩 주법의 문법을 완성한 거장. 마일스 데이비스의 프로듀서로도 활약하며 세련된 그루브의 정점을 보여줍니다.
+              </p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-zinc-800 text-xs text-zinc-400">
+              <strong>대표곡:</strong> Run for Cover, Power
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer class="border-t border-zinc-900 py-8 px-4 text-center text-xs text-zinc-500">
+    <p>SUPER MEGA UKULELE — Interactive Bass Guitar Web App · Built for GitHub Pages</p>
+  </footer>
+
+  <!-- JAVASCRIPT: 웹 오디오 베이스 신디사이저 & 아코디언 인터랙션 -->
+  <script>
+    // 1. 아코디언 토글 기능
+    function toggleAccordion(button) {
+      const item = button.parentElement;
+      const isActive = item.classList.contains('active');
+      
+      // 다른 아코디언 닫기 (깔끔한 단일 열림 유지)
+      document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('active'));
+      
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    }
+
+    // 2. Web Audio API 초기화 (외부 mp3 없이 브라우저 자체에서 묵직한 베이스 사운드 생성)
+    let audioCtx = null;
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    // 개별 베이스 현 튕기기 효과
+    function pluckString(freq, elementId, duration = 1.2, slap = false) {
+      initAudio();
+      const now = audioCtx.currentTime;
+
+      // 메인 저음 오실레이터 + 하모닉스 오실레이터
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const filter = audioCtx.createBiquadFilter();
+      const gain = audioCtx.createGain();
+
+      osc1.type = 'triangle';
+      osc2.type = slap ? 'sawtooth' : 'sine';
+      osc1.frequency.setValueAtTime(freq, now);
+      osc2.frequency.setValueAtTime(freq * 2, now);
+
+      // 로우패스 필터로 앰프 특유의 묵직함 구현
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(slap ? 2400 : 750, now);
+      filter.frequency.exponentialRampToValueAtTime(140, now + duration * 0.8);
+
+      // 엔벨로프 (타격감 & 서스테인)
+      gain.gain.setValueAtTime(0.01, now);
+      gain.gain.linearRampToValueAtTime(slap ? 0.55 : 0.45, now + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + duration);
+      osc2.stop(now + duration);
+
+      // 시각적 현 진동 애니메이션
+      if (elementId) {
+        const strEl = document.getElementById(elementId);
+        if (strEl) {
+          strEl.classList.remove('vibrate');
+          void strEl.offsetWidth; // reflow
+          strEl.classList.add('vibrate');
+          setTimeout(() => strEl.classList.remove('vibrate'), 450);
+        }
+      }
+    }
+
+    // 3. 베이스 트랙 루프 플레이어 (Bass Assassin 포함 3가지 그루브)
+    const tracks = [
+      {
+        title: "Bass Assassin (Slap & Funk Groove)",
+        desc: "공격적인 슬랩 주법과 옥타브 리프가 돋보이는 펑크 베이스 트랙",
+        bpm: 118,
+        // [주파수(Hz), 슬랩여부, 현ID] (0은 쉼표)
+        pattern: [
+          [41.20, true, 'str-e'], [0, false, null], [82.41, true, 'str-d'], [41.20, false, 'str-e'],
+          [55.00, true, 'str-a'], [61.74, false, 'str-a'], [65.41, true, 'str-a'], [130.81, true, 'str-g'],
+          [41.20, true, 'str-e'], [41.20, false, 'str-e'], [98.00, true, 'str-g'], [82.41, false, 'str-d'],
+          [73.42, true, 'str-d'], [65.41, false, 'str-a'], [55.00, true, 'str-a'], [49.00, false, 'str-e']
+        ]
+      },
+      {
+        title: "Dark Metal Pick Riff",
+        desc: "피크로 강하게 긁어내리는 묵직한 헤비메탈 16비트 베이스 리프",
+        bpm: 132,
+        pattern: [
+          [41.20, true, 'str-e'], [41.20, false, 'str-e'], [41.20, false, 'str-e'], [48.99, true, 'str-e'],
+          [41.20, false, 'str-e'], [41.20, false, 'str-e'], [55.00, true, 'str-a'], [41.20, false, 'str-e'],
+          [41.20, true, 'str-e'], [41.20, false, 'str-e'], [61.74, true, 'str-a'], [55.00, false, 'str-a'],
+          [48.99, true, 'str-e'], [43.65, false, 'str-e'], [41.20, true, 'str-e'], [0, false, null]
+        ]
+      },
+      {
+        title: "Midnight Walking Jazz",
+        desc: "따뜻한 핑거링으로 부드럽게 걸어가는 심야 재즈 워킹 베이스",
+        bpm: 96,
+        pattern: [
+          [65.41, false, 'str-a'], [0, false, null], [82.41, false, 'str-d'], [0, false, null],
+          [98.00, false, 'str-g'], [0, false, null], [110.00, false, 'str-g'], [0, false, null],
+          [87.31, false, 'str-d'], [0, false, null], [73.42, false, 'str-d'], [0, false, null],
+          [65.41, false, 'str-a'], [0, false, null], [49.00, false, 'str-e'], [0, false, null]
+        ]
+      }
+    ];
+
+    let currentTrackIdx = 0;
+    let isPlaying = false;
+    let stepIndex = 0;
+    let loopTimer = null;
+
+    function selectTrack(idx) {
+      currentTrackIdx = idx;
+      stepIndex = 0;
+      document.getElementById('track-title').textContent = tracks[idx].title;
+      document.getElementById('track-desc').textContent = tracks[idx].desc;
+
+      // 탭 스타일 갱신
+      document.querySelectorAll('.track-tab').forEach((btn, i) => {
+        if (i === idx) {
+          btn.className = "track-tab text-left p-3 rounded-xl bg-amber-500/15 border border-amber-500/50 transition";
+          btn.firstElementChild.className = "text-xs text-amber-400 font-bold";
+        } else {
+          btn.className = "track-tab text-left p-3 rounded-xl bg-zinc-950/60 border border-zinc-800 hover:border-zinc-700 transition";
+          btn.firstElementChild.className = "text-xs text-zinc-400 font-bold";
+        }
+      });
+
+      if (isPlaying) {
+        stopLoop();
+        startLoop();
+      }
+    }
+
+    function startLoop() {
+      initAudio();
+      const track = tracks[currentTrackIdx];
+      const stepMs = (60 / track.bpm / 4) * 1000; // 16분음표 간격
+
+      document.getElementById('eq-box').classList.add('playing');
+      document.getElementById('play-icon').textContent = '⏹';
+      document.getElementById('play-text').textContent = '재생 정지';
+
+      loopTimer = setInterval(() => {
+        const [freq, isSlap, strId] = track.pattern[stepIndex];
+        if (freq > 0) {
+          pluckString(freq, strId, 0.45, isSlap);
+        }
+        stepIndex = (stepIndex + 1) % track.pattern.length;
+      }, stepMs);
+    }
+
+    function stopLoop() {
+      clearInterval(loopTimer);
+      loopTimer = null;
+      document.getElementById('eq-box').classList.remove('playing');
+      document.getElementById('play-icon').textContent = '▶';
+      document.getElementById('play-text').textContent = '트랙 재생';
+    }
+
+    function togglePlay() {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    }
+  </script>
+</body>
+</html>
